@@ -1,9 +1,11 @@
-import React, { Fragment } from 'react'
+import React from 'react'
+import { Provider } from 'react-redux'
+import store from './store'
 import Map from './components/Map'
 
 const App = () => (
-	<Fragment>
+	<Provider store={store}>
 		<Map />
-	</Fragment>
+	</Provider>
 )
 export default App
