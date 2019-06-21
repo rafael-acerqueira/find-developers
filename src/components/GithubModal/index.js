@@ -17,7 +17,7 @@ const customStyles = {
 	}
 }
 
-const GithubModal = () => {
+const GithubModal = ({ latitude, longitude }) => {
 	const [repoName, setRepoName] = useState('')
 	const showModal = useSelector(state => state.modal.isOpen)
 	const isLoading = useSelector(state => state.repositories.isLoading)
@@ -29,8 +29,9 @@ const GithubModal = () => {
 
 	const handleAddRepository = e => {
 		e.preventDefault()
-		console.log(repoName)
-		dispatch(RepositoryActions.addRepositoryRequest())
+		dispatch(
+			RepositoryActions.addRepositoryRequest(repoName, latitude, longitude)
+		)
 	}
 	return (
 		<Modal

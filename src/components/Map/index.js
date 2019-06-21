@@ -14,10 +14,14 @@ const Map = () => {
 		zoom: 14
 	})
 
+	const [latitude, setLatitude] = useState('')
+	const [longitude, setLongitude] = useState('')
+
 	const dispatch = useDispatch()
 
 	const handleMapClick = e => {
-		console.log(e.lngLat)
+		setLatitude(e.lngLat[0])
+		setLongitude(e.lngLat[1])
 		dispatch(ModalActions.openModal())
 	}
 
@@ -29,7 +33,7 @@ const Map = () => {
 				onViewportChange={viewport => setViewport(viewport)}
 				mapboxApiAccessToken={process.env.MAPBOX_ACCESS_TOKEN}
 			/>
-			<Modal />
+			<Modal latitude={latitude} longitude={longitude} />
 		</Fragment>
 	)
 }

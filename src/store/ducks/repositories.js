@@ -19,7 +19,12 @@ export default function repositories (state = INITIAL_STATE, action) {
 }
 
 export const Creators = {
-	addRepositoryRequest: () => ({
-		type: Types.ADD_REQUEST
+	addRepositoryRequest: (repoName, latitude, longitude) => ({
+		type: Types.ADD_REQUEST,
+		payload: {
+			repoName,
+			latitude,
+			longitude
+		}
 	})
 }
