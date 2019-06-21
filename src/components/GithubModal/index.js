@@ -4,6 +4,7 @@ import Modal from 'react-modal'
 
 import { Form, Button } from './styles'
 import { Creators as ModalActions } from '../../store/ducks/modal'
+import { Creators as RepositoryActions } from '../../store/ducks/repositories'
 
 const customStyles = {
 	content: {
@@ -19,6 +20,7 @@ const customStyles = {
 const GithubModal = () => {
 	const [repoName, setRepoName] = useState('')
 	const showModal = useSelector(state => state.modal.isOpen)
+	const isLoading = useSelector(state => state.repositories.isLoading)
 	const dispatch = useDispatch()
 
 	const closeModal = () => {
@@ -28,7 +30,7 @@ const GithubModal = () => {
 	const handleAddRepository = e => {
 		e.preventDefault()
 		console.log(repoName)
-		closeModal()
+		dispatch(RepositoryActions.addRepositoryRequest())
 	}
 	return (
 		<Modal
@@ -48,7 +50,7 @@ const GithubModal = () => {
 				<div>
 					<Button onClick={closeModal}>Cancelar</Button>
 					<Button type="submit" submit>
-						Salvar
+						{isLoading ? 'Adicionando...' : 'Salvar'}
 					</Button>
 				</div>
 			</Form>
