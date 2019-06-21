@@ -1,18 +1,9 @@
 import React, { Fragment, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import ReactMapGL from 'react-map-gl'
-import Modal from 'react-modal'
 import 'mapbox-gl/dist/mapbox-gl.css'
-
-const customStyles = {
-	content: {
-		top: '50%',
-		left: '50%',
-		right: 'auto',
-		bottom: 'auto',
-		marginRight: '-50%',
-		transform: 'translate(-50%, -50%)'
-	}
-}
+import Modal from '../GithubModal'
+import { Creators as ModalActions } from '../../store/ducks/modal'
 
 const Map = () => {
 	const [viewport, setViewport] = useState({
@@ -23,17 +14,11 @@ const Map = () => {
 		zoom: 14
 	})
 
-	const [showModal, setShowModal] = useState(false)
-	const [repoName, setRepoName] = useState('')
-
-	const handleAddRepository = e => {
-		e.preventDefault()
-		console.log(repoName)
-	}
+	const dispatch = useDispatch()
 
 	const handleMapClick = e => {
 		console.log(e.lngLat)
-		setShowModal(true)
+		dispatch(ModalActions.openModal())
 	}
 
 	return (
@@ -44,27 +29,9 @@ const Map = () => {
 				onViewportChange={viewport => setViewport(viewport)}
 				mapboxApiAccessToken={process.env.MAPBOX_ACCESS_TOKEN}
 			/>
-			<Modal
-				isOpen={showModal}
-				onRequestClose={() => setShowModal(false)}
-				style={customStyles}
-				contentLabel="Example Modal"
-			>
-				<h2>Adicionar novo usuário</h2>
-				<form onSubmit={handleAddRepository}>
-					<input
-						type="text"
-						placeholder="Usuário do Github"
-						value={repoName}
-						onChange={e => setRepoName(e.target.value)}
-					/>
-					<button type="submit">Salvar</button>
-					<button onClick={() => setShowModal(false)}>Cancelar</button>
-				</form>
-			</Modal>
+			<Modal />
 		</Fragment>
 	)
 }
 
-Modal.setAppElement('#root')
 export default Map
