@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Modal from 'react-modal'
 
+import { Form, Button } from './styles'
 import { Creators as ModalActions } from '../../store/ducks/modal'
 
 const customStyles = {
@@ -27,6 +28,7 @@ const GithubModal = () => {
 	const handleAddRepository = e => {
 		e.preventDefault()
 		console.log(repoName)
+		closeModal()
 	}
 	return (
 		<Modal
@@ -35,17 +37,21 @@ const GithubModal = () => {
 			style={customStyles}
 			contentLabel="Example Modal"
 		>
-			<h2>Adicionar novo usuário</h2>
-			<form onSubmit={handleAddRepository}>
+			<Form onSubmit={handleAddRepository}>
+				<h2>Adicionar novo usuário</h2>
 				<input
 					type="text"
 					placeholder="Usuário do Github"
 					value={repoName}
 					onChange={e => setRepoName(e.target.value)}
 				/>
-				<button type="submit">Salvar</button>
-				<button onClick={closeModal}>Cancelar</button>
-			</form>
+				<div>
+					<Button onClick={closeModal}>Cancelar</Button>
+					<Button type="submit" submit>
+						Salvar
+					</Button>
+				</div>
+			</Form>
 		</Modal>
 	)
 }
