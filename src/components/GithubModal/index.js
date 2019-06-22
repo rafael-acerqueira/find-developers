@@ -4,7 +4,7 @@ import Modal from 'react-modal'
 
 import { Form, Button } from './styles'
 import { Creators as ModalActions } from '../../store/ducks/modal'
-import { Creators as RepositoryActions } from '../../store/ducks/repositories'
+import { Creators as UserActions } from '../../store/ducks/users'
 
 const customStyles = {
 	content: {
@@ -18,20 +18,19 @@ const customStyles = {
 }
 
 const GithubModal = ({ latitude, longitude }) => {
-	const [repoName, setRepoName] = useState('')
+	const [userName, setUserName] = useState('')
 	const showModal = useSelector(state => state.modal.isOpen)
-	const isLoading = useSelector(state => state.repositories.isLoading)
+	const isLoading = useSelector(state => state.users.isLoading)
 	const dispatch = useDispatch()
 
 	const closeModal = () => {
 		dispatch(ModalActions.closemodal())
 	}
 
-	const handleAddRepository = e => {
+	const handleAddUser = e => {
 		e.preventDefault()
-		dispatch(
-			RepositoryActions.addRepositoryRequest(repoName, latitude, longitude)
-		)
+		dispatch(UserActions.addUserRequest(userName, latitude, longitude))
+		setUserName('')
 	}
 	return (
 		<Modal
@@ -40,13 +39,14 @@ const GithubModal = ({ latitude, longitude }) => {
 			style={customStyles}
 			contentLabel="Example Modal"
 		>
-			<Form onSubmit={handleAddRepository}>
+			<Form onSubmit={handleAddUser}>
 				<h2>Adicionar novo usuário</h2>
 				<input
 					type="text"
 					placeholder="Usuário do Github"
-					value={repoName}
-					onChange={e => setRepoName(e.target.value)}
+					value={userName}
+					onChange={e => setUserName(e.target.value)}
+					autoFocus
 				/>
 				<div>
 					<Button onClick={closeModal}>Cancelar</Button>
