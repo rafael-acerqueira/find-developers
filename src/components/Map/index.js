@@ -42,7 +42,12 @@ const Map = () => {
 						captureClick={true}
 					>
 						<img
-							style={{ width: 50, height: 50, borderRadius: 100 }}
+							style={{
+								width: 50,
+								height: 50,
+								borderRadius: 100,
+								border: '3px solid #000'
+							}}
 							src={marker.avatar}
 							alt="avatar"
 						/>
