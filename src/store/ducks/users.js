@@ -1,11 +1,11 @@
 export const Types = {
 	ADD_REQUEST: 'users:ADD_REQUEST',
-	ADD_SUCCESS: 'users:ADD_SUCCESS'
+	ADD_SUCCESS: 'users:ADD_SUCCESS',
+	ADD_ERROR: 'users:ADD_ERROR'
 }
 
 const INITIAL_STATE = {
 	isLoading: false,
-	error: false,
 	data: []
 }
 
@@ -19,6 +19,8 @@ export default function users (state = INITIAL_STATE, action) {
 			isLoading: false,
 			data: [...state.data, action.payload.data]
 		}
+	case Types.ADD_ERROR:
+		return { ...state, isLoading: false }
 	default:
 		return state
 	}
@@ -38,5 +40,9 @@ export const Creators = {
 		payload: {
 			data
 		}
+	}),
+
+	addUserError: () => ({
+		type: Types.ADD_ERROR
 	})
 }
