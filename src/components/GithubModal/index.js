@@ -49,7 +49,9 @@ const GithubModal = ({ latitude, longitude }) => {
 					autoFocus
 				/>
 				<div>
-					<Button onClick={closeModal}>Cancelar</Button>
+					<Button type="button" onClick={closeModal}>
+						Cancelar
+					</Button>
 					<Button type="submit" submit>
 						{isLoading ? 'Adicionando...' : 'Salvar'}
 					</Button>
