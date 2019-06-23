@@ -52,8 +52,8 @@ const GithubModal = ({ latitude, longitude }) => {
 					<Button type="button" onClick={closeModal}>
 						Cancelar
 					</Button>
-					<Button type="submit" submit>
-						{isLoading ? 'Adicionando...' : 'Salvar'}
+					<Button type="submit" submit disabled={isLoading}>
+						{isLoading ? 'Adding...' : 'Salvar'}
 					</Button>
 				</div>
 			</Form>

@@ -14,6 +14,7 @@ export const Wrapper = styled.aside`
 export const UserItem = styled.li`
 	border-bottom: 1px solid #eee;
 	display: flex;
+	justify-content: space-between;
 	list-style: none;
 	padding-bottom: 20px;
 	margin-bottom: 25px;
@@ -24,11 +25,15 @@ export const UserItem = styled.li`
 		border-radius: 100px;
 	}
 
-	div {
+	.info {
 		display: flex;
 		flex-direction: column;
 		margin-left: 10px;
 		justify-content: space-evenly;
+	}
+
+	.info-box {
+		display: flex;
 	}
 
 	span {
@@ -40,6 +45,20 @@ export const UserItem = styled.li`
 		&.login {
 			color: #aaa;
 			font-size: 14px;
+		}
+	}
+
+	button {
+		background-color: #fff;
+		border: 0;
+
+		svg {
+			cursor: pointer;
+			font-size: 20px;
+
+			path {
+				fill: #d55453;
+			}
 		}
 	}
 `
