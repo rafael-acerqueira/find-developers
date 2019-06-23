@@ -1,7 +1,8 @@
 export const Types = {
 	ADD_REQUEST: 'users:ADD_REQUEST',
 	ADD_SUCCESS: 'users:ADD_SUCCESS',
-	ADD_ERROR: 'users:ADD_ERROR'
+	ADD_ERROR: 'users:ADD_ERROR',
+	REMOVE: 'users:REMOVE'
 }
 
 const INITIAL_STATE = {
@@ -21,6 +22,12 @@ export default function users (state = INITIAL_STATE, action) {
 		}
 	case Types.ADD_ERROR:
 		return { ...state, isLoading: false }
+
+	case Types.REMOVE:
+		return {
+			...state,
+			data: state.data.filter(user => user.id !== action.payload.id)
+		}
 	default:
 		return state
 	}
@@ -41,8 +48,13 @@ export const Creators = {
 			data
 		}
 	}),
-
 	addUserError: () => ({
 		type: Types.ADD_ERROR
+	}),
+	removeUser: id => ({
+		type: Types.REMOVE,
+		payload: {
+			id
+		}
 	})
 }

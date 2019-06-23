@@ -1,10 +1,13 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { Creators as userActions } from '../../store/ducks/users'
 
 import { Wrapper, UserItem } from './styles'
 
 const UserList = () => {
 	const users = useSelector(state => state.users.data)
+	const dispatch = useDispatch()
 	return (
 		<Wrapper>
 			<ul>
@@ -15,6 +18,12 @@ const UserList = () => {
 							<span className="name">{user.name}</span>
 							<span className="login">{user.login}</span>
 						</div>
+						<button
+							type="button"
+							onClick={() => dispatch(userActions.removeUser(user.id))}
+						>
+							x
+						</button>
 					</UserItem>
 				))}
 			</ul>
